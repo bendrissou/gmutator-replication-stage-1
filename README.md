@@ -29,7 +29,7 @@ Experiments were done in an Ubuntu machine with 4GB of RAM. And 4 CPU cores.
 
 Install the following software:
 
-* Docker version 23.0.1
+* Docker
 
 Next, download the following files from the Zenodo DOI
 to the directory `replication`
@@ -50,3 +50,30 @@ $ du -ksh gmutator.tar
 $ md5sum gmutator.tar
 995d0f1626ed347126bf293d7606d8b6  gmutator.tar
 ```
+### Importing the image
+
+Execute the following command to load the docker image:
+
+```
+$ docker load -i gmutator.tar
+Loaded image: gmutator-replication:json
+```
+
+### Bring up the virtual container
+
+The following command will bring up the virtual container, and access the container.
+
+```
+$ docker run --name gmutator-rep -it gmutator-replication:json /bin/bash
+```
+
+### Reproducing json experiments
+
+To run all learning tasks, run command:
+
+```
+$ cd home/gmutator/json
+$ make
+```
+
+This will execute all: Generation scripts and evaluation scripts.
