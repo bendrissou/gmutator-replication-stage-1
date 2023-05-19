@@ -157,6 +157,8 @@ Total inputs: 40
 Issues found: 0
 ```
 
+The report is partitioned into 9 parts. This is because inputs are grouped into 9 sets, where each set is evaluated independently.
+
 #### Differential testing between the SUT and the parser generated from the original grammar
 
 This shows number of inputs accepted by the original grammar, and number of inputs accepted by SUT `cJSON`:
