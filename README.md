@@ -90,7 +90,30 @@ $ cd json
 $ make
 ```
 
-This will execute all: Generation scripts and evaluation scripts.
+This will execute all: Generation scripts and evaluation scripts. This may take some time, depending on how you set GEN_TIME above.
+
+### Mutation output
+
+Running `make` above, will cause Gmutator to run as well. The grammar mutation code can be found in `/home/gmutator/mutate.py`.
+
+Each mutated grammar, together with it's generated inputs, are stored in a subfolder under folder `mutants`. For instanse, to see the difference between the original grammar and the first mutated grammar, we can run:
+
+```
+$ diff mutants/0/JSON.g4 mutants/1/JSON.g4
+2,4d1
+<    : (',' value)+
+---
+>    : (',' NUMBER)+
+45c42
+<    | obj
+---
+>    | EXP
+60c57
+<    : 'u' HEX HEX HEX HEX
+---
+>    : 'u' json HEX HEX HEX
+79d75
+```
 
 ### Reproducing json results
 
@@ -174,6 +197,13 @@ Inputs valid according to cjson: 153
 ```
 
 `Issues` here refers to the number of SUT crashes found.
+
+To see input files that are accepted by SUT `cJSON`, but rejected by the original json grammar, we do:
+
+```
+$ ls results/mut/diff-test-g/cjson/inputs/b_not_a
+test_m1_24.json  test_m1_25.json  test_m1_31.json  test_m1_38.json
+```
 
 #### Differential testing across SUTs
 
